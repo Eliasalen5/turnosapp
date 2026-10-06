@@ -1,0 +1,68 @@
+<section class="panel">
+  <h2>Nuevo servicio</h2>
+  <form id="service-form">
+    <div class="form-grid">
+      <label>
+        Nombre *
+        <input type="text" name="name" required maxlength="100" placeholder="Corte de pelo" />
+      </label>
+      <label>
+        Categoría
+        <input type="text" name="category" maxlength="50" placeholder="peluquería" value="general" />
+      </label>
+      <label>
+        Duración (min)
+        <input type="number" name="duration" min="1" max="1440" value="30" />
+      </label>
+      <label>
+        Precio
+        <input type="number" name="price" min="0" step="0.01" value="0" />
+      </label>
+      <label class="full-width">
+        Descripción
+        <textarea name="description" maxlength="500" rows="2" placeholder="Descripción del servicio"></textarea>
+      </label>
+      <label class="checkbox">
+        <input type="checkbox" name="available" checked />
+        Disponible
+      </label>
+    </div>
+    <button type="submit" class="btn btn-primary">Crear servicio</button>
+    <p id="form-message" class="form-message" aria-live="polite"></p>
+  </form>
+</section>
+
+<section class="panel">
+  <h2>Servicios disponibles</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Categoría</th>
+        <th>Duración</th>
+        <th>Precio</th>
+        <th>Disponible</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="services-tbody">
+      {{#each services}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{category}}</td>
+        <td>{{duration}} min</td>
+        <td>{{formatCurrency price}}</td>
+        <td>{{#if available}}Sí{{else}}No{{/if}}</td>
+        <td>
+          <button class="btn btn-danger btn-delete-service" data-id="{{_id}}">Eliminar</button>
+        </td>
+      </tr>
+      {{else}}
+      <tr>
+        <td colspan="6" class="empty">No hay servicios cargados</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <p class="hint">Los cambios se reflejan en tiempo real sin recargar la página.</p>
+</section>

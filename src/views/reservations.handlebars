@@ -1,0 +1,38 @@
+<section class="panel">
+  <h2>Reservas</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Reserva</th>
+        <th>Servicios</th>
+        <th>Cantidad total</th>
+        <th>Creada</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="reservations-tbody">
+      {{#each reservations}}
+      <tr>
+        <td>#{{shortId _id}}</td>
+        <td>
+          {{#each services}}
+          <span class="badge">{{service.name}} × {{quantity}}</span>
+          {{else}}
+          <span class="empty">Sin servicios</span>
+          {{/each}}
+        </td>
+        <td>{{totalQuantity services}}</td>
+        <td>{{formatDate createdAt}}</td>
+        <td>
+          <button class="btn btn-danger btn-delete-reservation" data-id="{{_id}}">Eliminar</button>
+        </td>
+      </tr>
+      {{else}}
+      <tr>
+        <td colspan="5" class="empty">No hay reservas creadas</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <p class="hint">Creá reservas desde la API: <code>POST /api/reservations</code></p>
+</section>
